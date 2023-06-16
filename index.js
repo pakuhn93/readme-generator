@@ -1,21 +1,24 @@
 // TODO: Include packages needed for this application
 const inquirer = require('inquirer');
 const fs = require('fs');
+const md = require('./utils/generateMarkdown.js');
 
 // TODO: Create an array of questions for user input
-// const questionsString = `Project Title,Description,Table of Contents,Installation,Usage,Credits,License`;
-const questionsString = `Project Title,Description,Table of Contents,Installation,Usage,Contributors,License,Tests,Questions`
-const questionsArr = questionsString.split(',');
+// const questionsStr = `Project Title,Description,Table of Contents,Installation,Usage,Credits,License,Tests,Questions`;
+const questionsStr = `Project Title,Description,Table of Contents,Installation,Usage,Contributors,License,Tests,Questions`
+const questionsArr = questionsStr.split(',');
 const [rmTitle, rmDesc, rmToc, rmInstall, rmUsage, rmContribute, rmLicense, rmTests, rmQuestions] = questionsArr;
+const licensesStr = `1,2,3,4,5`;
+const licensesArr = licensesStr.split(',');
+const tableOfContents = ``
 console.log(rmDesc);
-const outputFileAnswers = 'test.md';
+const outputFileAnswers = 'README.md';
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, {title, description, toc, installation, usage, credits, license, tests, questions}) {
-    let readmeTemplate = 
-    `# ${title}\n## ${rmDesc}\n ${description}\n## ${rmToc}\n ${toc}\n## ${rmInstall}\n ${installation}\n## ${rmUsage}\n ${usage}\n## ${rmContribute}\n ${credits}\n## ${rmLicense}\n ${license}\n## ${rmTests}\n${tests}\n## ${rmQuestions}\n${questions}`;
+function writeToFile(fileName, answers) {
+    let readme = md.generateReadme(questionsArr, answers);
     
-    fs.writeFile(fileName, readmeTemplate, (error, data) => {
+    fs.writeFile(fileName, readme, (error, data) => {
          error ? console.log(error) : console.log(data);
     });
 }
@@ -55,9 +58,10 @@ function init(){
                 message: `${rmContribute}`
             },
             {
-                type: 'input',
+                type: 'list',
                 name: 'license',
-                message: `${rmLicense}`
+                message: `${rmLicense}`,
+                choices: licensesArr
             },
             {
                 type: 'input',

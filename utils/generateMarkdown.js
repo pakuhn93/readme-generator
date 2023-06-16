@@ -17,4 +17,19 @@ function generateMarkdown(data) {
 `;
 }
 
-module.exports = generateMarkdown;
+function generateReadme(questionsArr, {title, description, toc, installation, usage, credits, license, tests, questions}){
+  const [rmTitle, rmDesc, rmToc, rmInstall, rmUsage, rmContribute, rmLicense, rmTests, rmQuestions] = questionsArr;
+  let readmeTemplate = 
+    `# ${title}\n## ${rmDesc}\n ${description}\n## ${rmToc}\n ${toc}\n## ${rmInstall}\n ${installation}\n## ${rmUsage}\n ${usage}\n## ${rmContribute}\n ${credits}\n## ${rmLicense}\n ${license}\n## ${rmTests}\n${tests}\n## ${rmQuestions}\n${questions}`;
+    return readmeTemplate;
+}
+
+// module.exports = generateMarkdown;
+module.exports = {
+  generateReadme: (questionsArr, {title, description, toc, installation, usage, credits, license, tests, questions}) => {
+    const [rmTitle, rmDesc, rmToc, rmInstall, rmUsage, rmContribute, rmLicense, rmTests, rmQuestions] = questionsArr;
+  let readmeTemplate = 
+    `# ${title}\n## ${rmDesc}\n ${description}\n## ${rmToc}\n ${toc}\n## ${rmInstall}\n ${installation}\n## ${rmUsage}\n ${usage}\n## ${rmContribute}\n ${credits}\n## ${rmLicense}\n ${license}\n## ${rmTests}\n${tests}\n## ${rmQuestions}\n${questions}`;
+    return readmeTemplate;
+  }
+}

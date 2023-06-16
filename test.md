@@ -2,7 +2,7 @@
 ## Description
  This is a project that creates a professional README file
 ## Table of Contents
- There's only really one part of this program so you should be okay.
+[my-link](#installation)
 ## Installation
  You're gonna have to do some command line work so I hope you like node!
 ## Usage
